@@ -69,6 +69,9 @@
     .fire {
       color: orange;
     }
+    .broken-heart {
+      color: #ff1744; /* A deeper red for the broken heart */
+    }
   </style>
 </head>
 <body>
@@ -111,6 +114,7 @@
 
     document.getElementById('noButton').addEventListener('click', function () {
       explosion('fire');
+      explosion('💔');
       document.querySelector('h1').textContent = 'Will Hammy be my valentine instead :(?';
     });
   </script>
