@@ -11,25 +11,27 @@
       background: #fff0f6;
       padding: 1rem;
       margin: 0;
-      overflow: hidden; /* Prevents scrolling when animations are large */
+      overflow: hidden; /* Keeps the overflow caused by animations within the viewport */
     }
     h1 {
       color: #e91e63;
       font-size: 1.5rem;
       padding: 0.5rem;
+      margin-bottom: 1rem; /* Adds space below the title */
     }
     .images {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       gap: 0.5rem;
     }
     .images img {
-      width: 100%; /* Adjusts the size to fit the container */
-      max-width: 300px; /* Maximum size */
-      height: auto;
+      width: 90%; /* Adjusts the width to be 90% of its container */
+      max-width: 300px; /* Ensures images do not exceed 300px in width */
+      height: auto; /* Keeps the aspect ratio of the images */
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin: auto; /* Centers images horizontally */
     }
     .buttons {
       display: flex;
@@ -46,6 +48,9 @@
       cursor: pointer;
     }
     @media (min-width: 600px) {
+      .images {
+        flex-direction: row; /* Displays images side by side on wider screens */
+      }
       .buttons {
         flex-direction: row;
         justify-content: center;
@@ -69,7 +74,7 @@
 <body>
   <h1>Will you be my Valentine?</h1>
   <div class="images">
-   <img src="frog.jpg" alt="Frog Valentine" />
+    <img src="frog.jpg" alt="Frog Valentine" />
     <img src="hamster.jpg" alt="Hamster Valentine" />
   </div>
   <div class="buttons">
