@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Be My Valentine?</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      background: #fefefe;
+      padding: 2rem;
+    }
+    h1 {
+      margin-top: 2rem;
+      color: #e91e63;
+    }
+    .images img {
+      width: 150px;
+      margin: 1rem;
+    }
+    .buttons button {
+      padding: 0.5rem 1rem;
+      margin: 1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    /* Simple explosion animation style (you can replace this with a library for a fancier effect) */
+    .explosion {
+      animation: explode 1s forwards;
+    }
+    @keyframes explode {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(3); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Will you be my Valentine?</h1>
+  <div class="images">
+    <!-- Replace 'frog.jpg' and 'hamster.jpg' with your image files -->
+    <img src="frog.jpg" alt="Frog" />
+    <img src="hamster.jpg" alt="Hamster" />
+  </div>
+  <div class="buttons">
+    <button id="yesButton">Yes</button>
+    <button id="noButton">No</button>
+  </div>
+
+  <script>
+    // Function to create a simple explosion animation effect
+    function createExplosion() {
+      const explosion = document.createElement('div');
+      explosion.textContent = '💥';
+      explosion.style.fontSize = '5rem';
+      explosion.style.position = 'fixed';
+      explosion.style.top = '50%';
+      explosion.style.left = '50%';
+      explosion.style.transform = 'translate(-50%, -50%)';
+      explosion.classList.add('explosion');
+      document.body.appendChild(explosion);
+
+      // Remove the explosion element after the animation
+      explosion.addEventListener('animationend', () => {
+        explosion.remove();
+      });
+    }
+
+    document.getElementById('yesButton').addEventListener('click', function() {
+      // Trigger explosion animation on yes
+      createExplosion();
+      // Optionally, change the message or add further interactivity:
+      document.querySelector('h1').textContent = 'Yay! Valentine Explosion!';
+    });
+
+    document.getElementById('noButton').addEventListener('click', function() {
+      // Change the text if "No" is clicked
+      document.querySelector('h1').textContent = 'Will hammy be my Valentine instead?';
+    });
+  </script>
+</body>
+</html>
