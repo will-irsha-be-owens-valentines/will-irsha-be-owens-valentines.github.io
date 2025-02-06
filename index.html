@@ -8,39 +8,69 @@
     body {
       text-align: center;
       font-family: sans-serif;
-      background: #fefefe;
-      padding: 2rem;
+      background: #fff0f6;
+      padding: 1rem;
+      margin: 0;
+      overflow: hidden; /* Prevents scrolling when animations are large */
     }
     h1 {
-      margin-top: 2rem;
       color: #e91e63;
+      font-size: 1.5rem;
+      padding: 0.5rem;
+    }
+    .images {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
     }
     .images img {
-      width: 150px;
-      margin: 1rem;
+      width: 100%; /* Adjusts the size to fit the container */
+      max-width: 300px; /* Maximum size */
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-    .buttons button {
-      padding: 0.5rem 1rem;
-      margin: 1rem;
-      font-size: 1.2rem;
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    button {
+      padding: 0.8rem;
+      font-size: 1rem;
+      background: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 5px;
       cursor: pointer;
     }
-    /* Simple explosion animation style (you can replace this with a library for a fancier effect) */
-    .explosion {
-      animation: explode 1s forwards;
+    @media (min-width: 600px) {
+      .buttons {
+        flex-direction: row;
+        justify-content: center;
+      }
+      h1 {
+        font-size: 2rem;
+      }
     }
-    @keyframes explode {
-      0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(3); opacity: 0; }
+    .particle {
+      position: fixed;
+      pointer-events: none;
+    }
+    .heart {
+      color: red;
+    }
+    .fire {
+      color: orange;
     }
   </style>
 </head>
 <body>
   <h1>Will you be my Valentine?</h1>
   <div class="images">
-    <!-- Replace 'frog.jpg' and 'hamster.jpg' with your image files -->
-    <img src="frog.jpg" alt="Frog" />
-    <img src="hamster.jpg" alt="Hamster" />
+    <img src="https://source.unsplash.com/300x300/?valentine,frog" alt="Frog Valentine" />
+    <img src="https://source.unsplash.com/300x300/?valentine,hamster" alt="Hamster Valentine" />
   </div>
   <div class="buttons">
     <button id="yesButton">Yes</button>
@@ -48,33 +78,34 @@
   </div>
 
   <script>
-    // Function to create a simple explosion animation effect
-    function createExplosion() {
-      const explosion = document.createElement('div');
-      explosion.textContent = '💥';
-      explosion.style.fontSize = '5rem';
-      explosion.style.position = 'fixed';
-      explosion.style.top = '50%';
-      explosion.style.left = '50%';
-      explosion.style.transform = 'translate(-50%, -50%)';
-      explosion.classList.add('explosion');
-      document.body.appendChild(explosion);
-
-      // Remove the explosion element after the animation
-      explosion.addEventListener('animationend', () => {
-        explosion.remove();
-      });
+    function createParticle(x, y, particleType) {
+      const particle = document.createElement('span');
+      particle.classList.add('particle', particleType);
+      particle.textContent = particleType === 'heart' ? '❤️' : '🔥';
+      particle.style.fontSize = Math.random() * 24 + 24 + 'px'; // Random size from 24px to 48px
+      particle.style.position = 'fixed';
+      particle.style.left = x + 'px';
+      particle.style.top = y + 'px';
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 3000); // Remove after 3 seconds
     }
 
-    document.getElementById('yesButton').addEventListener('click', function() {
-      // Trigger explosion animation on yes
-      createExplosion();
-      // Optionally, change the message or add further interactivity:
+    function explosion(particleType) {
+      const numberOfParticles = 100;
+      for (let i = 0; i < numberOfParticles; i++) {
+        const x = window.innerWidth * Math.random();
+        const y = window.innerHeight * Math.random();
+        createParticle(x, y, particleType);
+      }
+    }
+
+    document.getElementById('yesButton').addEventListener('click', function () {
+      explosion('heart');
       document.querySelector('h1').textContent = 'Yay! Valentine Explosion!';
     });
 
-    document.getElementById('noButton').addEventListener('click', function() {
-      // Change the text if "No" is clicked
+    document.getElementById('noButton').addEventListener('click', function () {
+      explosion('fire');
       document.querySelector('h1').textContent = 'Will hammy be my Valentine instead?';
     });
   </script>
