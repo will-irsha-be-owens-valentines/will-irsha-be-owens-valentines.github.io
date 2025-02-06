@@ -88,8 +88,8 @@
   <script>
     function createParticle(x, y, particleType) {
       const particle = document.createElement('span');
-      particle.classList.add('particle', particleType);
-      particle.textContent = particleType === 'heart' ? '❤️' : '🔥';
+      particle.classList.add('particle');
+      particle.textContent = particleType;
       particle.style.fontSize = Math.random() * 24 + 24 + 'px'; // Random size from 24px to 48px
       particle.style.position = 'fixed';
       particle.style.left = x + 'px';
@@ -99,7 +99,7 @@
     }
 
     function explosion(particleType) {
-      const numberOfParticles = 100;
+      const numberOfParticles = 50;
       for (let i = 0; i < numberOfParticles; i++) {
         const x = window.innerWidth * Math.random();
         const y = window.innerHeight * Math.random();
@@ -108,14 +108,14 @@
     }
 
     document.getElementById('yesButton').addEventListener('click', function () {
-      explosion('heart');
-      document.querySelector('h1').textContent = 'Yay! You made an Owen very happy :)!';
+      explosion('❤️');
+      document.querySelector('h1').textContent = 'Yay! Valentine Explosion!';
     });
 
     document.getElementById('noButton').addEventListener('click', function () {
       explosion('🔥');
       explosion('💔');
-      document.querySelector('h1').textContent = 'Will Hammy be my valentine instead :(?';
+      document.querySelector('h1').textContent = 'Will hammy be my Valentine instead?';
     });
   </script>
 </body>
